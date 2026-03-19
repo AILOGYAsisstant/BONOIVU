@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-surface text-on-surface font-body;
+    min-height: max(884px, 100dvh);
+  }
+}
+
+@layer utilities {
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+  }
+
+  .serif-italic {
+    @apply font-serif italic;
+  }
+
+  .editor-paper {
+    background-image: linear-gradient(#e5e7eb 1px, transparent 1px);
+    background-size: 100% 2.5rem;
+  }
+
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .ocr-highlight {
+    background-color: rgba(212, 175, 55, 0.25);
+    border: 1px dashed #d4af37;
+    position: absolute;
+  }
+
+  .scanline {
+    height: 2px;
+    background: linear-gradient(to right, transparent, #dc2626, transparent);
+    position: absolute;
+    width: 100%;
+    top: 40%;
+    box-shadow: 0 0 15px #dc2626;
+  }
+}
