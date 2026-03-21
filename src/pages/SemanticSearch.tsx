@@ -1,26 +1,24 @@
 
+import { useTranslation } from 'react-i18next';
 
 export const SemanticSearch = () => {
-  return (
-    <main className="px-12 pb-12 pt-24 min-h-full bg-surface">
-      {/* Semantic Search Section */}
-      <section className="max-w-5xl mx-auto">
-        <div className="mb-12 text-center">
-          <h2 className="font-serif text-4xl italic text-primary mb-2">Kho Lưu trữ & Tìm kiếm Ngữ nghĩa</h2>
-          <p className="font-sans text-on-surface-variant tracking-tight">Truy vấn tri thức pháp quy bằng ngôn ngữ tự nhiên được hỗ trợ bởi AI</p>
-        </div>
+  const { t } = useTranslation();
 
+  return (
+    <main className="px-12 pb-12 pt-12 min-h-full bg-surface">
+      {/* Semantic Search Section */}
+      <section className="max-w-6xl mx-auto">
         {/* Central Large Search Bar */}
-        <div className="relative group mb-16">
+        <div className="relative group mb-10">
           <div className="absolute -inset-1 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
-          <div className="relative flex items-center bg-surface-container-lowest shadow-[0_15px_40px_rgba(138,27,27,0.08)] rounded-sm p-2 border-b-2 border-outline-variant">
+          <div className="relative flex items-center bg-surface-container-lowest shadow-[0_15px_40px_rgba(138,27,27,0.08)] rounded-sm p-1.5 border-b-2 border-outline-variant">
             <div className="pl-6 pr-4 text-secondary">
               <span className="material-symbols-outlined text-3xl">manage_search</span>
             </div>
-            <input className="w-full py-6 bg-transparent border-none focus:ring-0 text-xl font-body text-on-surface placeholder:text-stone-400" placeholder="Nhập nội dung cần tra cứu..." type="text" defaultValue="Các quy định về phụ cấp thâm niên nhà giáo trước năm 2010" />
-            <button className="bg-primary text-on-primary px-8 py-4 mr-2 rounded-sm font-bold flex items-center gap-2 hover:opacity-95 transition-all">
+            <input className="w-full py-6 bg-transparent border-none focus:ring-0 text-xl font-body text-on-surface placeholder:text-stone-400" placeholder={t('search.placeholder')} type="text" defaultValue="Các quy định về phụ cấp thâm niên nhà giáo trước năm 2010" />
+            <button className="bg-primary text-on-primary px-8 py-2 mr-1.5 rounded-sm font-bold flex items-center gap-2 hover:opacity-95 transition-all whitespace-nowrap">
               <span className="material-symbols-outlined text-sm">search</span>
-              TRA CỨU
+              {t('search.button')}
             </button>
           </div>
         </div>
@@ -34,7 +32,7 @@ export const SemanticSearch = () => {
               <div className="absolute top-0 left-0 w-1 h-full bg-secondary"></div>
               <div className="flex items-center gap-3 mb-6">
                 <span className="material-symbols-outlined text-secondary" style={{ fontVariationSettings: "'FILL' 1" }}>auto_awesome</span>
-                <h3 className="font-serif text-xl font-bold text-primary">Tóm lược AI: Chế độ Thâm niên (Tiền 2010)</h3>
+                <h3 className="font-serif text-xl font-bold text-primary">{t('search.ai_summary')} Chế độ Thâm niên (Tiền 2010)</h3>
               </div>
               <div className="font-body text-on-surface text-lg leading-relaxed space-y-4">
                 <p>Theo Nghị định số 61/2006/NĐ-CP và các văn bản hướng dẫn liên quan, phụ cấp thâm niên nhà giáo được xác định dựa trên thời gian giảng dạy trực tiếp trong ngành giáo dục.</p>
@@ -52,7 +50,7 @@ export const SemanticSearch = () => {
             {/* Semantic Connections */}
             <div className="grid grid-cols-2 gap-6">
               <div className="bg-surface-container-low p-6 rounded-sm">
-                <h4 className="font-label text-[10px] uppercase tracking-widest text-primary mb-4">Văn bản liên quan</h4>
+                <h4 className="font-label text-[10px] uppercase tracking-widest text-primary mb-4">{t('search.related_docs')}</h4>
                 <ul className="space-y-3">
                   <li className="text-sm font-medium hover:text-secondary cursor-pointer flex items-start gap-2">
                     <span className="material-symbols-outlined text-xs mt-1">link</span>
@@ -65,7 +63,7 @@ export const SemanticSearch = () => {
                 </ul>
               </div>
               <div className="bg-surface-container-low p-6 rounded-sm">
-                <h4 className="font-label text-[10px] uppercase tracking-widest text-primary mb-4">Chủ thể tác động</h4>
+                <h4 className="font-label text-[10px] uppercase tracking-widest text-primary mb-4">{t('search.subjects')}</h4>
                 <div className="flex flex-wrap gap-2">
                   <span className="bg-white px-2 py-1 text-[10px] font-bold border border-outline-variant">NHÀ GIÁO CÔNG LẬP</span>
                   <span className="bg-white px-2 py-1 text-[10px] font-bold border border-outline-variant">BIÊN CHẾ</span>
@@ -96,34 +94,23 @@ export const SemanticSearch = () => {
               <div className="flex items-start gap-3 mb-4">
                 <span className="material-symbols-outlined text-primary">translate</span>
                 <div>
-                  <h4 className="font-serif font-bold text-primary">Chuyển ngữ Lịch sử</h4>
-                  <p className="text-[10px] font-body mt-1">Dịch tự động các sắc lệnh Hán-Nôm hoặc Pháp văn sang Quốc ngữ hiện đại.</p>
+                  <h4 className="font-serif font-bold text-primary">{t('search.historical_translate')}</h4>
+                  <p className="text-[10px] font-body mt-1">{t('search.historical_desc')}</p>
                 </div>
               </div>
               <button className="w-full py-3 bg-stone-300 text-stone-500 font-bold text-xs uppercase cursor-not-allowed" disabled>
-                Xem bản dịch Hán-Nôm
+                {t('search.view_han_nom')}
               </button>
               <div className="mt-2 flex items-center gap-1 justify-center">
                 <span className="material-symbols-outlined text-[10px]">lock</span>
-                <span className="text-[9px] font-bold uppercase tracking-tighter">Yêu cầu quyền truy cập cấp 4</span>
+                <span className="text-[9px] font-bold uppercase tracking-tighter">{t('search.access_required')}</span>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Floating UI: AI Assistant State */}
-      <div className="fixed bottom-8 right-8 z-50">
-        <div className="flex items-center gap-3 bg-primary-container p-4 rounded-sm shadow-[0_20px_50px_rgba(138,27,27,0.3)]">
-          <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-primary">
-            <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>smart_toy</span>
-          </div>
-          <div className="pr-4">
-            <p className="text-white font-bold text-xs">Sovereign Copilot</p>
-            <p className="text-on-primary-container text-[10px]">Đang phân tích 1.2M hồ sơ...</p>
-          </div>
-        </div>
-      </div>
+
     </main>
   );
 };
