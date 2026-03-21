@@ -14,16 +14,12 @@ concurrency:
   group: "pages"
   cancel-in-progress: false
 
-# BỎ env này ở đây, chỉ giữ trong jobs để tránh conflict
-# env:
-#   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     steps:
       - name: Checkout
@@ -32,7 +28,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version: 22
           cache: 'npm'
 
       - name: Install dependencies
@@ -48,8 +44,7 @@ jobs:
         uses: actions/configure-pages@v5
 
       - name: Upload artifact
-        # ↑ THAY ĐỔI DUY NHẤT: v3 → v4 (đã support Node.js 24 full)
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist
 
@@ -60,9 +55,6 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     steps:
       - name: Deploy to GitHub Pages
