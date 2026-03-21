@@ -140,12 +140,7 @@ export const AICopilot = () => {
         </div>
       </section>
 
-      {/* Floating AI Prompt Overlay (Contextual) */}
-      <div className="fixed bottom-8 right-8 z-50">
-        <button className="w-14 h-14 bg-primary rounded-sm shadow-[0_10px_30px_rgba(138,27,27,0.3)] flex items-center justify-center text-on-primary group transition-all hover:scale-105 active:scale-95">
-          <span className="material-symbols-outlined text-3xl group-hover:rotate-12 transition-transform">auto_awesome</span>
-        </button>
-      </div>
+
     </>
   );
 };
