@@ -14,9 +14,9 @@ concurrency:
   group: "pages"
   cancel-in-progress: false
 
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-  ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
+# BỎ env này ở đây, chỉ giữ trong jobs để tránh conflict
+# env:
+#   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   build:
@@ -48,7 +48,8 @@ jobs:
         uses: actions/configure-pages@v5
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        # ↑ THAY ĐỔI DUY NHẤT: v3 → v4 (đã support Node.js 24 full)
+        uses: actions/upload-pages-artifact@v4
         with:
           path: ./dist
 
