@@ -1,10 +1,38 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 export const LandingPage = () => {
   const { t } = useTranslation();
+  const [activeSection, setActiveSection] = useState('home');
+
+  useEffect(() => {
+    const sections = ['architecture', 'pillars', 'flow'];
+    const handleScroll = () => {
+      // Find the first section that is NOT above the threshold
+      // We check from bottom to top
+      const scrollPos = window.scrollY + 200;
+      
+      if (window.scrollY < 200) {
+        setActiveSection('home');
+        return;
+      }
+
+      let currentSection = 'home';
+      for (const sectionId of sections) {
+        const element = document.getElementById(sectionId);
+        if (element && scrollPos >= element.offsetTop) {
+          currentSection = sectionId;
+        }
+      }
+      setActiveSection(currentSection);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const [isChatOpen, setIsChatOpen] = useState(false);
 
   return (
@@ -13,15 +41,50 @@ export const LandingPage = () => {
       <nav className="bg-[#f7f9fb] dark:bg-slate-950 docked full-width top-0 z-50 border-b border-[#dfbfbc]/20 shadow-sm dark:shadow-none sticky">
         <div className="flex justify-between items-center w-full px-8 py-4 max-w-screen-2xl mx-auto">
           <div className="flex items-center gap-2">
-            <span className="text-xl font-serif font-bold text-[#8b1c1c] dark:text-white uppercase tracking-tighter relative -top-[0px]">
+            <button 
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              className="text-xl font-serif font-bold text-[#8b1c1c] dark:text-white uppercase tracking-tighter relative -top-[0px] bg-transparent border-none p-0 cursor-pointer"
+            >
               {t('branding')} <span className="text-stone-400 font-light mx-1">x</span> AILOGY
-            </span>
+            </button>
           </div>
           <div className="hidden md:flex items-center gap-8">
-            <Link className="text-[#8b1c1c] dark:text-[#d4af37] font-bold border-b-2 border-[#d4af37] pb-1" to="/">{t('nav.home')}</Link>
-            <a className="text-[#191c1e] dark:text-slate-300 hover:text-[#8b1c1c] transition-colors" href="#architecture">{t('nav.architecture')}</a>
-            <a className="text-[#191c1e] dark:text-slate-300 hover:text-[#8b1c1c] transition-colors" href="#pillars">{t('nav.pillars')}</a>
-            <a className="text-[#191c1e] dark:text-slate-300 hover:text-[#8b1c1c] transition-colors" href="#flow">{t('nav.simulation')}</a>
+            <button 
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              className={`${activeSection === 'home' 
+                ? 'text-[#8b1c1c] font-bold border-b-2 border-[#d4af37] pb-1 shadow-active' 
+                : 'text-[#191c1e] dark:text-slate-300 hover:text-[#8b1c1c]'
+              } bg-transparent border-none p-0 cursor-pointer text-sm transition-all`}
+            >
+              {t('nav.home')}
+            </button>
+            <button 
+              onClick={() => document.getElementById('architecture')?.scrollIntoView({ behavior: 'smooth' })}
+              className={`${activeSection === 'architecture' 
+                ? 'text-[#8b1c1c] font-bold border-b-2 border-[#d4af37] pb-1 shadow-active' 
+                : 'text-[#191c1e] dark:text-slate-300 hover:text-[#8b1c1c]'
+              } bg-transparent border-none p-0 cursor-pointer text-sm font-medium transition-all`}
+            >
+              {t('nav.architecture')}
+            </button>
+            <button 
+              onClick={() => document.getElementById('pillars')?.scrollIntoView({ behavior: 'smooth' })}
+              className={`${activeSection === 'pillars' 
+                ? 'text-[#8b1c1c] font-bold border-b-2 border-[#d4af37] pb-1 shadow-active' 
+                : 'text-[#191c1e] dark:text-slate-300 hover:text-[#8b1c1c]'
+              } bg-transparent border-none p-0 cursor-pointer text-sm font-medium transition-all`}
+            >
+              {t('nav.pillars')}
+            </button>
+            <button 
+              onClick={() => document.getElementById('flow')?.scrollIntoView({ behavior: 'smooth' })}
+              className={`${activeSection === 'flow' 
+                ? 'text-[#8b1c1c] font-bold border-b-2 border-[#d4af37] pb-1 shadow-active' 
+                : 'text-[#191c1e] dark:text-slate-300 hover:text-[#8b1c1c]'
+              } bg-transparent border-none p-0 cursor-pointer text-sm font-medium transition-all`}
+            >
+              {t('nav.simulation')}
+            </button>
           </div>
           <div className="flex items-center gap-4">
             <Link
